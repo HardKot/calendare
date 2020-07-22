@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> {{ name }} </title>
+        {% csrf_token %}
+        {% load static %}
+        <link rel="stylesheet" type="text/css"  href="{% static "css/index.css" %}">
+        <input type="hidden" value={{ url }} id="main__URL">
+    </head>
+    <body>
+    <header>
+        <nav id="header_date" month="" year="">
+            <div id="buttons_header">
+                <input type="button" value="<" id="last__month" class="change__month">
+                <input type="button" value=">" id="next__month" class="change__month">
+            </div>
+            <div id="monthyear_header">
+                <span id="month" class="data"> </span>
+                <span id="year" class="data"> </span>
+            </div>
+        </nav>
+        <div id="calendare_title">
+            <span id="header_name"> {{ name }} </span>
+            <form id="new_name"> 
+                {% csrf_token %}
+                {{ rename.name }}
+                <input type="button" value="&#9997" id="rename">
+            </form>
+            <script type="text/javascript" src="{% static "js/name.js" %}"></script>
+        </div>
+    </header>
+    <table>
+        <tbody id="calendar">
+            <tr>
+                <th>Пн</th><th>Вт</th><th>Ср</th><th>Чт</th><th>Пт</th><th>Сб</th><th>Вс</th>
+            </tr>
+            <tr id="week_1" class="week">
+            </tr>
+        </tbody>
+    </table>
+    <div id="big_ass">
+        <form id='addEvent'>
+            {% csrf_token %}
+            название: {{ event.event_name }}
+            <br>
+            место: {{ event.place }}
+            {{ event.date }}
+            <br>
+            <input type="button" id="event_save" value="Добавить событие">
+        </form>
+            <script type="text/javascript" src="{% static "js/calendar.js" %}"></script>
+    </div>
+    </body>
+</html>
